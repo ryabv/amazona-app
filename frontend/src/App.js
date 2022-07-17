@@ -1,4 +1,8 @@
-import data from './data';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+import ProductScreen from './Screens/ProductScreen';
+import HomeScreen from './Screens/HomeScreen';
+
 import './App.css';
 
 function App() {
@@ -12,62 +16,56 @@ function App() {
   }
 
   return (
-    <div className="grid-container">
-        <header className="header">
-            <div className="brand">
-                <button onClick={openMenu}>
-                    &#9776;
-                </button>
+    <Router>
+        <div className="grid-container">
+            <header className="header">
+                <div className="brand">
+                    <button onClick={openMenu}>
+                        &#9776;
+                    </button>
 
-                <a href="index.html">amazona</a>
-            </div>
+                    <Link to="/">amazona</Link>
+                </div>
 
-            <div className="header-links">
-                <a href="cart.html">Cart</a>
-                <a href="signin.html">Sign in</a>
-            </div>
-        </header>
+                <div className="header-links">
+                    <a href="cart.html">Cart</a>
+                    <a href="signin.html">Sign in</a>
+                </div>
+            </header>
 
-        <aside className="sidebar">
-            <h3>Shopping Categories</h3>
+            <aside className="sidebar">
+                <h3>Shopping Categories</h3>
 
-            <button className="sidebar-close-button" onClick={closeMenu}>x</button>
+                <button className="sidebar-close-button" onClick={closeMenu}>x</button>
 
-            <ul>
-                <li>
-                    <a href="index.html">Pants</a>
-                </li>
+                <ul>
+                    <li>
+                        <a href="index.html">Pants</a>
+                    </li>
 
-                <li>
-                    <a href="index.html">Shorts</a>
-                </li>
-            </ul>
-        </aside>
-
-        <main className="main">
-            <div className="content">
-                <ul className="products">
-                    {data.products.map(product => (
-                      <li>
-                          <div className="product">
-                              <img className="product-image" src={product.image} alt="product" />
-                              <div className="product-name">
-                                  <a href="product.html">{product.name}</a>
-                              </div>
-                              <div className="product-brand">{product.brand}</div>
-                              <div className="product-price">${product.price}</div>
-                              <div className="product-rating">{product.ratins} Stars ({product.numReviews} Reviews)</div>
-                          </div>
-                      </li>
-                    ))}
+                    <li>
+                        <a href="index.html">Shorts</a>
+                    </li>
                 </ul>
-            </div>
-        </main>
+            </aside>
 
-        <footer className="footer">
-            All right reserved.
-        </footer>
-    </div>
+            <main className="main">
+                <div className="content">
+                    <Route path="/product/:id">
+                        <ProductScreen />
+                    </Route>
+
+                    <Route exact path="/">
+                        <HomeScreen />
+                    </Route>
+                </div>
+            </main>
+
+            <footer className="footer">
+                All right reserved.
+            </footer>
+        </div>
+    </Router>
   );
 }
 
