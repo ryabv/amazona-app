@@ -4,6 +4,7 @@ import ProductScreen from './screens/ProductScreen';
 import HomeScreen from './screens/HomeScreen';
 
 import './App.css';
+import CartScreen from './screens/CartScreen';
 
 function App() {
 
@@ -53,6 +54,10 @@ function App() {
                 <div className="content">
                     <Route path="/product/:id">
                         <ProductScreen />
+                    </Route>
+
+                    <Route path="/cart/:id?">
+                        <CartScreen />
                     </Route>
 
                     <Route exact path="/">
